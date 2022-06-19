@@ -1,2 +1,4 @@
-# csadence
-cadence setup
+# cadence setup
+* .cdsenv
+* .cdsinit
+
