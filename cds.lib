@@ -1,0 +1,118 @@
+# File Created by RA A/P Arindam Basu  RA y16 Zhang Xueyong at Sat Feb 26 17:35:23 2022
+# assisted by CdsLibEditor
+#INCLUDE $CDSHOME/share/cdssetup/dfII/cds.lib ##note: this is equal to line 10~17 
+INCLUDE /net/vlsiapp/usr5/library/CSM/chrt40lp_lprf_ver22/EDA-CAD-40N-DK001_22/DesignEnv/VirtuosoOA/cds.lib
+
+#### define library group
+## CadenceLib
+DEFINE CadenceLib ./Lib_Group/CadenceLib
+# define libraries
+DEFINE basic $CDSHOME/tools/dfII/etc/cdslib/basic
+DEFINE analogLib $CDSHOME/tools/dfII/etc/cdslib/artist/analogLib
+DEFINE functional $CDSHOME/tools/dfII/etc/cdslib/artist/functional
+DEFINE US_8ths $CDSHOME/tools/dfII/etc/cdslib/sheets/US_8ths
+DEFINE ahdlLib $CDSHOME/tools/dfII/samples/artist/ahdlLib
+DEFINE aExamples $CDSHOME/tools/dfII/samples/artist/aExamples
+DEFINE rfExamples $CDSHOME/tools/dfII/samples/artist/rfExamples
+DEFINE rfLib $CDSHOME/tools/dfII/samples/artist/rfLib
+# Customize the Library Manager
+ASSIGN analogLib DISPLAY CadenceLibrary
+ASSIGN ahdlLib DISPLAY CadenceLibrary
+ASSIGN basic DISPLAY CadenceLibrary
+ASSIGN functional DISPLAY CadenceLibrary
+ASSIGN aExamples DISPLAY CadenceLibrary
+ASSIGN rfExamples DISPLAY CadenceLibrary
+ASSIGN rfLib DISPLAY CadenceLibrary
+ASSIGN US_8ths DISPLAY CadenceLibrary
+ASSIGN CadenceLib DISPLAY CadenceLibrary
+ASSIGN CadenceLib COMBINE ahdlLib analogLib basic functional aExamples rfExamples rfLib US_8ths
+
+##LULU Lib
+DEFINE LuluLib ./Lib_Group/LuluLib
+DEFINE RERAM_LL ./group/lluphdy16/RERAM_LL
+DEFINE ReRAM_1M ./group/lluphdy16/ReRAM_1M
+DEFINE ReRAM_1M_LU ./group/lluphdy16/ReRAM_1M_LU
+DEFINE GF_BITCELL ./group/lluphdy16/GF_BITCELL
+DEFINE CIM_LULU ./group/lluphdy16/CIM
+DEFINE PUF_LULU ./group/lluphdy16/PUF
+DEFINE TEST_LULU ./group/lluphdy16/TEST
+DEFINE TEST1_LULU ./group/lluphdy16/TEST_1
+DEFINE ReRAM_LAYOUT ./ReRAM_LAYOUT
+ASSIGN RERAM_LL DISPLAY LuluLib
+ASSIGN ReRAM_1M DISPLAY LuluLib
+ASSIGN ReRAM_1M_LU DISPLAY LuluLib
+ASSIGN GF_BITCELL DISPLAY LuluLib
+ASSIGN CIM_LULU DISPLAY LuluLib
+ASSIGN PUF_LULU DISPLAY LuluLib
+ASSIGN TEST_LULU DISPLAY LuluLib
+ASSIGN TEST1_LULU DISPLAY LuluLib
+ASSIGN LuluLib DISPLAY LuluLib
+ASSIGN LuluLib COMBINE RERAM_LL ReRAM_1M ReRAM_1M_LU GF_BITCELL CIM_LULU PUF_LULU TEST_LULU TEST1_LULU ReRAM_LAYOUT
+
+##JuEon Lib
+DEFINE JueonLib ./Lib_Group/JueonLib
+DEFINE ReRam_JK ./group/jueony19/RERAM/ReRam_JK
+DEFINE ReRam_TY ./group/jueony19/RERAM/RERAM_TY
+DEFINE ReRam_TC1_PRE ./group/jueony19/RERAM/RERAM_TC1_PRE
+DEFINE ReRam_1M_VS ./group/jueony19/RERAM/ReRAM_1M_VS
+DEFINE ReRam_Array_VS ./group/jueony19/RERAM/ReRAM_Array_VS
+#DEFINE ADC ./group/jueony19/CIM/ADC #tsmc65n
+ASSIGN ReRam_JK DISPLAY JueonLib
+ASSIGN ReRam_TY DISPLAY JueonLib
+ASSIGN ReRam_TC1_PRE DISPLAY JueonLib
+ASSIGN JueonLib DISPLAY JueonLib
+ASSIGN JueonLib COMBINE ReRam_JK ReRam_TY ReRam_TC1_PRE ReRam_1M_VS ReRam_Array_VS
+
+##Sharma Lib
+DEFINE SharmaLib ./Lib_Group/SharmaLib
+DEFINE ReRAM_1M_VS ./group/sharmavf20/ReRAM_1M_VS
+#DEFINE ReRAM_1M_VS /home/usr1/staff/sharmavf20/work/GF40/sharmavf20/ReRAM_1M_VS
+DEFINE ReRAM_Array_VS ./group/sharmavf20/ReRAM_Array_VS
+#DEFINE ReRAM_Array_VS /home/usr1/staff/sharmavf20/work/GF40/sharmavf20/ReRAM_Array_VS
+ASSIGN ReRAM_1M_VS DISPLAY SharmaLib
+ASSIGN ReRAM_Array_VS DISPLAY SharmaLib
+ASSIGN SharmaLib DISPLAY SharmaLib
+ASSIGN SharmaLib COMBINE ReRAM_1M_VS ReRAM_Array_VS
+
+
+##YuzongLib
+DEFINE YuzongLib ./Lib_Group/YuzongLib
+DEFINE RERAM_4T2R_YZ ./group/yuzongy20/RERAM_4T2R_YZ
+ASSIGN RERAM_4T2R_YZ DISPLAY YuzongLib
+ASSIGN YuzongLib DISPLAY YuzongLib
+ASSIGN YuzongLib COMBINE RERAM_4T2R_YZ
+
+
+##MyLib
+DEFINE ZXY_RRAM ./ZXY_RRAM
+DEFINE ZXY_test ./ZXY_test
+DEFINE ZXY_IP_chrt40 ./ZXY_IP_chrt40
+
+
+#DEFINE AMS_Tutorial    /home/Div6/research/zhangray16/zhangxy/tutorial/AMS_Tutorial
+DEFINE tcbn65lp_xy /home/Div6/research/zhangray16/tsmc065rf_K3/tcbn65lp_xy
+DEFINE ZXY_VerilogAMS ../zhangxy/ZXY_VerilogAMS
+
+############
+##RRAM model
+DEFINE RRAM_Lib ./Lib_Group/RRAM_Lib
+DEFINE VerilogRRAM ./VerilogRRAM
+DEFINE XRRamPDK ./Model_RRAM/NTU/DC_model/XRRam
+DEFINE Model_test ./Model_test
+DEFINE RRAM_lib_20210715 ./Model_RRAM/NTU/20210715_Model/RRAM_lib
+DEFINE RRAM_lib_20210907 ./Model_RRAM/NTU/updated_cell_20210907
+DEFINE RRAM_lib_20211021 ./Model_RRAM/NTU/RRAM_20211021/RRAM_lib
+DEFINE RRAM_lib_20211026 ./Model_RRAM/NTU/RRAM_20211026
+DEFINE RRAM_lib_20211028 ./Model_RRAM/NTU/RRAM_20211028/RRAM_lib
+DEFINE RRAM_lib_20211203 ./Model_RRAM/NTU/RRAM_20211203
+DEFINE RRAM_lib_20220329_dc_model ./Model_RRAM/NTU/20220329_dc_model
+DEFINE RRAM_lib_20220330_dc_model ./Model_RRAM/NTU/20220330_dc_model
+ASSIGN RRAM_Lib DISPLAY RRAM_Lib
+ASSIGN RRAM_Lib COMBINE VerilogRRAM XRRamPDK Model_test RRAM_lib_20210715 RRAM_lib_20210907 RRAM_lib_20211021 RRAM_lib_20211026 RRAM_lib_20211028 RRAM_lib_20211203 RRAM_lib_20220329_dc_model RRAM_lib_20220330_dc_model
+############
+DEFINE RRAM_public /home/Div6/research/zhangray16/chrt40lp_lprf_ver22/RRAM_public
+DEFINE ZXY_RRAM_CIM /home/zhangxy/zhangray16/chrt40lp_lprf_ver22/ZXY_RRAM_CIM
+#Removed by ddDeleteObj: DEFINE ZXY_testlast /home/Div6/research/zhangray16/chrt40lp_lprf_ver22/ZXY_testlast
+
+INCLUDE /net/vlsiserver2/usr1/cadence/IC618/tools.lnx86/dfII/etc/smg/smgLibs/cds.lib
+DEFINE ReRAM_1M_TC1 /home/zhangxy/zhangray16/chrt40lp_lprf_ver22/ReRAM_1M_TC1
