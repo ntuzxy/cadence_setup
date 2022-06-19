@@ -1,0 +1,12 @@
+mgc_home=getShellEnvVar("MGC_HOME")
+if(mgc_home!=nil && isDir(mgc_home) && isReadable(mgc_home) then
+	load( strcat( getShellEnvVar("MGC_HOME") "/shared/pkgs/icv/tools/queryskl/calibre.skl" ))
+else
+	printf("Calibre Skill Interface not loaded.\n")
+)
+
+;;;Add by zhangxy;;;
+;personal configuration
+loadi("~/zhangxy/zhangxy.cdsinit")
+;model lib setting
+loadi("~/zhangxy/libInit_chrt40.il")

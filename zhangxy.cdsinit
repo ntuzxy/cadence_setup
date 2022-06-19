@@ -1,0 +1,164 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;########By zhangxy##########
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+printf("JIAYOU, I LOVE U!!! \n")
+printf("loading ../zhangxy/zhangxy.cdsinit... \n")
+
+;Change the default text editor
+editor="gvim"
+
+
+;;;;;;;;;; schematic ;;;;;;;;;;
+
+;Close the "What's new" window
+ddsNewsClose() 
+
+;Resize the Command Interface Window (CIW)
+hiResizeWindow(window(1) list(1:25 800:200)) 
+; hiResizeWindow(window(1) list(400:150 1200:600))
+
+; open Library manager after launch
+ddsOpenLibManager()
+
+
+; the number of significant digits to annotate DC operating  point
+;auCore.misc labelDigits int 6 
+
+; ADE simulation path, the default is in ~/simulation
+; envSetVal("asimenv.startup" "projectDir" 'string "your directory")
+
+; undo limit, the default is 255 in virtuoso 6.xx
+hiSetUndoLimit(10)
+
+hiSetBindKey("Schematics" "<Key>a" "schHiMove()" )
+hiSetBindKey("Schematics" "<Key>9" "geAddNetProbe()" )
+hiSetBindKey("Schematics" "<Key>0" "geDeleteNetProbe()" )
+hiSetBindKey("Schematics" "Ctrl<Key>0" "geDeleteAllProbe(getCurrentWindow() t)" )
+
+;Zoom in and out with the mouse wheel 
+hiSetBindKey("Schematics" "None<Btn4Down>" "hiZoomInAtMouse()")
+hiSetBindKey("Schematics" "None<Btn5Down>" "hiZoomOutAtMouse()")
+;These commands zoom by a factor of 2. If this zoom step is too large you can customize it
+;hiSetBindKey("Schematics" "None<Btn4Down>"    "hiZoomWindowAtMouse(getCurrentWindow() 1.25)")
+;hiSetBindKey("Schematics" "None<Btn5Down>"    "hiZoomWindowAtMouse(getCurrentWindow() 0.8)")
+
+;envSetVal("schematic.wire" "color" 'string "cadetBlue") ;schCreateWireForm
+
+
+; Toggle Read Only / Make Editable Using Space Bar
+hiSetBindKey("Schematics" "Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
+hiSetBindKey("Layout" "Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
+hiSetBindKey("Symbol" "Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
+
+hiSetBindKey("Schematics" "Shift<key>L" "schHiCreateWireStubs()")
+
+
+
+;;;;;;;;;; wavescan -> viva ;;;;;;;;;; 
+
+envSetVal("viva.trace" "lineStyle" 'string "solid")
+envSetVal("viva.trace" "lineThickness" 'string "bold")
+envSetVal("viva.trace" "hiliteColor" 'string "lime")
+
+envSetVal("viva.rectGraph" "fontStyle" 'string "bold")
+envSetVal("viva.rectGraph" "fontSize" 'string "extralarge")
+envSetVal("viva.rectGraph" "fontSize" 'string "extralarge")
+envSetVal("viva.rectGraph" "majGridsOn" 'string "false")
+envSetVal("viva.rectGraph" "minGridsOn" 'string "false")
+envSetVal("viva.rectGraph" "stripChartOn" 'string "true")
+envSetVal("viva.graphFrame" "background" 'string "white") ;IC618
+
+
+envSetVal("viva.marker" "fontStyle" 'string "bold")
+envSetVal("viva.marker" "fontSize" 'string "extralarge")
+
+envSetVal("viva.browser" "plotStyle" 'string "newwin")
+envSetVal("viva.axis" "significantDigits" 'string "5")
+envSetVal("viva.rectGraph" "visibleStripChartRows" 'string "16")
+envSetVal("viva.rectGraph" "background" 'string "white")
+envSetVal("viva.rectGraph" "foreground" 'string "black")
+;white lightGray gray darkGray black red pink mistyRose orange gold lightTan lightBrown yellow
+;lightGoldenrod lemonChiffon blanchedAlmond green yellowGreen olivedrab honeydew cyan aquamarine
+;darkSeaGreen cadetBlue blue greyBlue lightSteelBlue skyBlue magenta blueViolet purple violet
+
+
+;;;;;;;;;; layout ;;;;;;;;;;
+
+load( "../zhangxy/Bindkeys_layout" )
+printf("load ../zhangxy/Bindkeys_layout done! \n")
+
+; mouse up/down/Shift+up/Shift+down
+list("None" "geScroll(nil \"n\" nil)") list("None" "geScroll(nil \"s\" nil)") list("Shift" "geScroll(nil \"e\" nil)") list("Shift" "geScroll(nil \"w\" nil)")
+
+;Zoom in and out with the mouse wheel 
+hiSetBindKey("Layout" "None<Btn4Down>" "hiZoomInAtMouse()")
+hiSetBindKey("Layout" "None<Btn5Down>" "hiZoomOutAtMouse()")
+
+;Highlight net
+hiSetBindKey("Layout" "<Key>9" "leHiMarkNet()" )
+hiSetBindKey("Layout" "<Key>0" "leHiUnmarkNet()" )
+
+;Alin
+hiSetBindKey("Layout" "<Key>a" "leHiAlign()" )
+
+;Pan location of mouse wheel click 
+hiSetBindKey("Layout" "<Btn2Down>" "hiPan(hiGetCurrentWindow() hiGetCommandPoint())")
+
+;;;;;;;;;; display ;;;;;;;;;;
+
+;personalize the display file
+drLoadDrf("../zhangxy/display_zhangxy.drf" nil)
+printf("load ../zhangxy/display_zhangxy.drf done! \n")
+
+;Load bindkeys
+;loadi "~cdsmgr/common/schBindKeys.il"
+;loadi "~cdsmgr/common/leBindKeys.il"
+
+;Changing the default simulation directory to /scratch/user_name
+;envSetVal("asimenv.startup" "projectDir" 'string strcat("/scratch/" getShellEnvVar("USER"))) 
+envSetVal("asimenv.startup" "projectDir" 'string "/media/project2/tmp/sim_zhangray16")
+
+
+;Add a model files path
+;asiSetEnvOptionVal( asiGetTool('spectre) "modelFiles" (("/model_file_path" "")) ) 
+asiSetEnvOptionVal(asiGetTool('spectre) "modelFiles"
+list(
+   list("#" "/net/vlsiserver/usr1/library/TSMC/TSMC065/TSMC65_CRN65LP/T-N65-CM-SP-007-K3/models/spectre/crn65lp_v1d5.scs")
+   list("#" "/home/Div6/research/zhangray16/tsmc065rf_K3/model/mismatch.scs")
+   list("#" "/home/Div6/research/zhangray16/zhangxy/tutorial/ADC/TECH/GPDK045/gpdk045/models/spectre/gpdk045.scs")
+   list("#" "/usr1/models/model3.scs")
+))
+
+;envSetVal("spectre.envOpts" "modelFiles" 'string "#;./models/model1.scs ./models/model2.scs")
+;envSetVal("spectre.envOpts" "modelFiles" 'string "#;/home/Div6/research/zhangray16/tsmc065rf_K3/model/mismatch.scs")
+
+;for AMS simulator
+;envSetVal("ams.envOpts" "modelFiles" 'string "~/myModels.scs")
+
+
+
+
+
+;;;;;;
+; By default, component CDF is not automatically updated when design 
+; variables are copied to the cellview.  To enable auto updating,
+; specify the following line in your .cdsinit file:
+;
+  artEnableAutoDesignVarCdfUpdate()
+;
+; artDisableAutoDesignVarCdfUpdate() can be used to disable auto updating.
+; artGetAutoDesignVarCdfUpdate() will return t if auto updating is enabled,
+; or nil otherwise.
+;
+
+
+;;;;;;;; simulator
+envSetVal( "asimenv.startup" "simulator" 'string "ams")
+
+;;;;;;;; AMS Connect Rule/Connect Module environment variable
+envSetVal("ams.envOpts" "connectRulesList" `string "connectLib;ConnRules_18V_full;connect connectLib;mixedsignal;connect")
+
+
+
+printf("load ../zhangxy/zhangxy.cdsinit done! \n")
