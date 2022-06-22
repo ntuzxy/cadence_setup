@@ -1,0 +1,1 @@
+envSetVal("cdsLibManager.main" "showCategoriesOn" 'boolean t)
