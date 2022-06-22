@@ -34,7 +34,7 @@ hiSetUndoLimit(10)
 hiSetBindKey("Schematics" "<Key>a" "schHiMove()" )
 hiSetBindKey("Schematics" "<Key>9" "geAddNetProbe()" )
 hiSetBindKey("Schematics" "<Key>0" "geDeleteNetProbe()" )
-hiSetBindKey("Schematics" "Ctrl<Key>0" "geDeleteAllProbe(getCurrentWindow() t)" )
+hiSetBindKey("Schematics" "Ctrl<Key>0" "geDeleteAllProbe()" )
 
 ;Zoom in and out with the mouse wheel 
 hiSetBindKey("Schematics" "None<Btn4Down>" "hiZoomInAtMouse()")
@@ -47,13 +47,13 @@ hiSetBindKey("Schematics" "None<Btn5Down>" "hiZoomOutAtMouse()")
 
 
 ; Toggle Read Only / Make Editable Using Space Bar
-hiSetBindKey("Schematics" "Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
-hiSetBindKey("Layout" "Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
-hiSetBindKey("Symbol" "Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
+hiSetBindKey("Schematics"  "Ctrl<Key>Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
+hiSetBindKey("Layout"      "Ctrl<Key>Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
+hiSetBindKey("Symbol"   "Ctrl<Key>Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
 
-hiSetBindKey("Schematics" "Shift<key>L" "schHiCreateWireStubs()")
-
-
+; quickly go to descend schematic and return. F2: go down (read only), F1: go up
+hiSetBindKey("Schematics" "<Key>F2" "envSetVal(\"schematic\" \"descendTarget\" 'string \"use viewNameList\") schHiDescendRead()")
+hiSetBindKey("Schematics" "<Key>F1" "schHiReturn()")
 
 ;;;;;;;;;; wavescan -> viva ;;;;;;;;;; 
 
