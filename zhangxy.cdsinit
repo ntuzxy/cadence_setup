@@ -21,6 +21,8 @@ hiResizeWindow(window(1) list(1:25 800:200))
 ; open Library manager after launch
 ddsOpenLibManager()
 
+; Descending order in schematic
+envSetVal("schematic" "viewNameList" 'string "schematic extracted_lvs veriloga verilog symbol")
 
 ; the number of significant digits to annotate DC operating  point
 ;auCore.misc labelDigits int 6 
@@ -51,7 +53,7 @@ hiSetBindKey("Schematics"  "Ctrl<Key>Space" "if(hiGetCurrentWindow()->cellView->
 hiSetBindKey("Layout"      "Ctrl<Key>Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
 hiSetBindKey("Symbol"   "Ctrl<Key>Space" "if(hiGetCurrentWindow()->cellView->mode != \"r\" then  geChangeEditMode(\"r\") else geChangeEditMode(\"a\"))")
 
-; quickly go to descend schematic and return. F2: go down (read only), F1: go up
+; Quickly go to descend schematic and return. F2: go down (read only), F1: go up
 hiSetBindKey("Schematics" "<Key>F2" "envSetVal(\"schematic\" \"descendTarget\" 'string \"use viewNameList\") schHiDescendRead()")
 hiSetBindKey("Schematics" "<Key>F1" "schHiReturn()")
 
